@@ -49,7 +49,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/registerUser")
+    @PostMapping("/users/registerUser")
     public @ResponseBody ResponseDTO registerUser(@RequestBody UserVO request){
 
         ResponseDTO responseDTO = new ResponseDTO();
