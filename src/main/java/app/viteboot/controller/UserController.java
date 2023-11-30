@@ -3,6 +3,7 @@ package app.viteboot.controller;
 import app.viteboot.dto.ResponseDTO;
 import app.viteboot.entity.UserEntity;
 import app.viteboot.service.UserService;
+import app.viteboot.vo.UserLoginVO;
 import app.viteboot.vo.UserVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.log4j.Log4j2;
@@ -68,6 +69,29 @@ public class UserController {
             return responseDTO;
         } catch (Exception ex) {
             log.error("ERROR, no se registró el usuario");
+            return responseDTO;
+        }
+    }
+
+    @PostMapping("/users/loginUser")
+    public @ResponseBody ResponseDTO loginUser(@RequestBody UserLoginVO request){
+
+        ResponseDTO responseDTO = new ResponseDTO();
+
+        userService.loginUser(request);
+
+        try {
+            responseDTO = ResponseDTO
+                    .builder()
+                    .status(Objects.nonNull(request))
+                    .message(Objects.nonNull(request) ? "correo y contraseña ingresado correctamente" : "correo y contraseña incorrecto")
+                    .data(request)
+                    .build();
+
+            log.info("correo y contraseña ingresado correctamente");
+            return responseDTO;
+        } catch (Exception ex) {
+            log.error("ERROR, correo y contraseña incorrecto");
             return responseDTO;
         }
     }

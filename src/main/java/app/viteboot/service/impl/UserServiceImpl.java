@@ -3,6 +3,7 @@ package app.viteboot.service.impl;
 import app.viteboot.entity.UserEntity;
 import app.viteboot.mapper.UserMapper;
 import app.viteboot.service.UserService;
+import app.viteboot.vo.UserLoginVO;
 import app.viteboot.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer registerUser(UserVO userVO) {
         return userMapper.registerUser(userVO);
+    }
+
+    @Override
+    public List<UserEntity> loginUser(UserLoginVO userVO) {
+        return userMapper.loginUser(userVO);
     }
 
 

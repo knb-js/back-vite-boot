@@ -1,6 +1,7 @@
 package app.viteboot.service;
 
 import app.viteboot.entity.UserEntity;
+import app.viteboot.vo.UserLoginVO;
 import app.viteboot.vo.UserVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,5 +13,7 @@ public interface UserService {
     UserEntity findAllUserByRut(@Param("rut") String rut);
 
     Integer registerUser(@Param("userVO") UserVO userVO);;
+
+    List<UserEntity> loginUser(@Param("userVO") UserLoginVO userVO);
 
 }

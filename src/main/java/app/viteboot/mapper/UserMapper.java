@@ -1,6 +1,7 @@
 package app.viteboot.mapper;
 
 import app.viteboot.entity.UserEntity;
+import app.viteboot.vo.UserLoginVO;
 import app.viteboot.vo.UserVO;
 import org.apache.ibatis.annotations.*;
 
@@ -33,4 +34,16 @@ public interface UserMapper {
             "VALUES(#{userVO.rut}, #{userVO.dv}, #{userVO.name}, #{userVO.lastName}, #{userVO.email}, #{userVO.password}, #{userVO.phone})")
     @Options(useGeneratedKeys = true,keyProperty = "userVO.rut",keyColumn = "rut")
     Integer registerUser(@Param("userVO") UserVO userVO);
+
+    @Select("    select " +
+            "    rut as rut, " +
+            "    dv as dv, " +
+            "    name as name, " +
+            "    last_name as lastName, " +
+            "    email as email, " +
+            "    password as password, " +
+            "    phone as phone " +
+            "    from user " +
+            "    where email = 'userVO.email' and password = 'userVO.password'")
+    List<UserEntity> loginUser(@Param("userVO") UserLoginVO userVO);
 }
