@@ -1,6 +1,5 @@
 package app.viteboot.vo;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data

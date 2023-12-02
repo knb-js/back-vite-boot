@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserService {
 
     List<UserEntity> findAllUser();
+
     UserEntity findAllUserByRut(@Param("rut") String rut);
 
     Integer registerUser(@Param("userVO") UserVO userVO);;

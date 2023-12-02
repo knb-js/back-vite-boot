@@ -30,9 +30,8 @@ public interface UserMapper {
     UserEntity findAllUserByRut(@Param("rut") String rut);
 
 
-    @Insert("INSERT INTO user(rut,dv, name, last_name, email, password, phone) " +
-            "VALUES(#{userVO.rut}, #{userVO.dv}, #{userVO.name}, #{userVO.lastName}, #{userVO.email}, #{userVO.password}, #{userVO.phone})")
-    @Options(useGeneratedKeys = true,keyProperty = "userVO.rut",keyColumn = "rut")
+    @Insert("INSERT INTO user(rut,dv, name, last_name, email, password, phone, active) " +
+            "VALUES(#{userVO.rut}, #{userVO.dv}, #{userVO.name}, #{userVO.lastName}, #{userVO.email}, #{userVO.password}, #{userVO.phone}, 'Y')")
     Integer registerUser(@Param("userVO") UserVO userVO);
 
     @Select("    select " +
