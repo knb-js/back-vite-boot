@@ -56,6 +56,7 @@ public class UserController {
         Integer register = userService.registerUser(request);
 
         try {
+            if(register != null){
                 responseDTO = ResponseDTO
                         .builder()
                         .status(Objects.nonNull(register))
@@ -63,8 +64,12 @@ public class UserController {
                         .data(register)
                         .build();
 
-            log.info("Usuario registrado con éxito");
-            return responseDTO;
+                log.info("Usuario registrado con éxito");
+                return responseDTO;
+            }else{
+                log.info("ERROR, el usuario se encuentra vacio");
+                return null;
+            }
         } catch (Exception ex) {
             log.error("ERROR, no se registró el usuario");
             return responseDTO;
@@ -76,18 +81,23 @@ public class UserController {
 
         ResponseDTO responseDTO = new ResponseDTO();
 
-        userService.loginUser(request);
+        List<UserEntity> userlistLogin = userService.loginUser(request);
 
         try {
-            responseDTO = ResponseDTO
-                    .builder()
-                    .status(Objects.nonNull(request))
-                    .message(Objects.nonNull(request) ? "correo y contraseña ingresado correctamente" : "correo y contraseña incorrecto")
-                    .data(request)
-                    .build();
+            if(userlistLogin != null){
+                responseDTO = ResponseDTO
+                        .builder()
+                        .status(Objects.nonNull(request))
+                        .message(Objects.nonNull(request) ? "correo y contraseña ingresado correctamente" : "correo y contraseña incorrecto")
+                        .data(request)
+                        .build();
 
-            log.info("correo y contraseña ingresado correctamente");
-            return responseDTO;
+                log.info("correo y contraseña ingresado correctamente");
+                return responseDTO;
+            }else {
+                log.info("ERROR, correo o contraseña se encuentra vacio");
+                return null;
+            }
         } catch (Exception ex) {
             log.error("ERROR, correo y contraseña incorrecto");
             return responseDTO;
